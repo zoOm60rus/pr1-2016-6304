@@ -6,3 +6,4 @@ char* print_str(char* name)
 {
 printf("%s\n",name);
 }
+

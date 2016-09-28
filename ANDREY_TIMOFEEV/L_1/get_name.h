@@ -1,2 +1,1 @@
 char *get_name();
-
