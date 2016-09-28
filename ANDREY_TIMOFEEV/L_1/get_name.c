@@ -13,3 +13,4 @@ char *get_name(){
     name[i] = '\0';
     return name;
 }
+
