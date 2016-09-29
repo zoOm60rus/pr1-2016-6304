@@ -7,10 +7,9 @@ char * get_name(){
    char ch;
    while((ch=getchar()) != '\n')
 {
-     name[i] = ch;
-           i++;
+    name[i] = ch;
+          i++;
 }
-     name[i]= '\0';
-     return name;
-}
-
+    name[i]= '\0';
+    return name;
+}  
