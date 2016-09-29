@@ -13,6 +13,4 @@ get_name.o:	get_name.c get_name.h
 print_str.o:	print_str.c print_str.h
 	gcc -I. -c print_str.c
 # creating o-file print_str.o
-clean:
-	rm *.o
-#removing all object files
+
