@@ -7,5 +7,3 @@ get_name.o: get_name.c get_name.h
 	gcc -c get_name.c
 print_str.o: print_str.c print_str.h
 	gcc -c print_str.c
-clean:
-	rm*.o
