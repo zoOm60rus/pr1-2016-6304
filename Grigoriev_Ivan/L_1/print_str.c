@@ -1,6 +1,8 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-void print_str(const char *name)
+char* print_str( char* name)
 {
 printf("%s\n", name);
+return 0;
 }
