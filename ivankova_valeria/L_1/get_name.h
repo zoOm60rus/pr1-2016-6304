@@ -1,1 +1,1 @@
-ar *get_name();
+char* get_name();
