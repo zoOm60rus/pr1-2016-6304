@@ -1,11 +1,8 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-
-  char*  print_str( char* name)
-                {
-                printf("%s\n", name);
-                return 0;
-                };
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+void print_str(const char *name)
+{
+printf("%s\n", name);
+}
 
