@@ -1,3 +1,5 @@
+#include "get_name.h"
+#include "print_str.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
