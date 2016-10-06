@@ -1,13 +1,10 @@
-#include <stdio.h>
+#include <string.h>
 #include "get_name.h"
 #include "print_str.h"
-main()
-{
-	char hello[90] = "Hello, ";
-	char* result;
-	result = get_name();
-	print_str(hello, result);
-	free(result);
+	int main()
+		{
+		char name[80], hello[10]="Hello, ";
+		get_name(name);
+		print_str(name, hello);
 		return 0;
-
-}
+		}
