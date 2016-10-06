@@ -1,5 +1,8 @@
 all: laba clean
 
+clean: laba
+	rm *.o
+
 laba: main.o get_name.o print_str.o
 	gcc main.o get_name.o print_str.o -o laba
 
@@ -9,5 +12,4 @@ print_str.o: print_str.c
 	gcc -c  print_str.c
 main.o: main.c
 	gcc -c main.c
-clean:
-	rm *.o 
+ 
