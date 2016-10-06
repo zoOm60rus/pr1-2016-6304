@@ -1,5 +1,3 @@
-
-
 main: get_name.o print_str.o main.o
 	gcc main.o -o main get_name.o print_str.o
 #Линковка
