@@ -1,10 +1,10 @@
-all: laba clean
+all: program clean
 
-clean: laba
+clean: program
 	rm *.o
 
-laba: main.o get_name.o print_str.o
-	gcc main.o get_name.o print_str.o -o laba
+program: main.o get_name.o print_str.o
+	gcc main.o get_name.o print_str.o -o program
 
 get_name.o: get_name.c
 	gcc -c get_name.c
