@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "get_name.h"  //podkluchaem
+#include "get_name.h"
 #include "print_str.h"
 main()
 {
