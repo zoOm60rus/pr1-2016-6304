@@ -1,4 +1,4 @@
-name.out: get_name.o print_str.o main.o
+name: get_name.o print_str.o main.o
 	 gcc main.o -o name  get_name.o print_str.o 
 	rm *.o
 main.o: main.c
