@@ -1,1 +1,1 @@
-int puts(const char *str);
+void print_str(char* name);
