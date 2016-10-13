@@ -34,8 +34,8 @@ int get_sum(int arr[], int n){
 
 int get_count_first_el(int arr[], int n){
     int i;
-    int pel=0;
-    for (i=2;i<n;i++)
+    int pel=-1;
+    for (i=0;i<n;i++)
         if (arr[i] == arr[0])
            pel++;
     return pel;
