@@ -41,6 +41,10 @@ return fel;
 } 
 
 void menu(int ch, int arr[], int n){ 
+  scanf("%d%d", n, ch);
+	for (int i = 0;i < n ;i++)
+		scanf("%d", arr[i]);
+ 
 switch ( ch ) { 
 case 0: 
 printf("%d", get_max(arr, n)); 
