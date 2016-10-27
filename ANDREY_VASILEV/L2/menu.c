@@ -1,28 +1,4 @@
 #include<stdio.h>
-void menu(int ch, int n, int arr[]){        
-    int a;
-    switch (ch){
-        case 0:
-            a = get_max(arr, n);
-            printf ("%d\n", a);
-            break;
-        case 1:
-            a = get_min(arr, n);
-            printf ("%d\n", a);
-            break;
-        case 2:
-            a = get_sum(arr, n);
-            printf ("%d\n", a);
-            break;
-        case 3:
-            a = get_count_first_el(arr, n);
-            printf ("%d\n", a);
-            break;
-        default:
-            printf("Данные некорректны\n");
-            break;
-    }
-}
 
 int get_max(int arr[], int n){
 int i, max;
@@ -61,3 +37,28 @@ int i, count = 0;				//С помощью цикла и условия прове
     }						//осуществляется со второго элемента
     return count;				//т.к. сам первый элемент считаться
 }						//не должен
+void menu(int ch, int n, int arr[]){
+    int a;
+    switch (ch){
+        case 0:
+            a = get_max(arr, n);
+            printf ("%d\n", a);
+            break;
+        case 1:
+            a = get_min(arr, n);
+            printf ("%d\n", a);
+            break;
+        case 2:
+            a = get_sum(arr, n);
+            printf ("%d\n", a);
+            break;
+        case 3:
+            a = get_count_first_el(arr, n);
+            printf ("%d\n", a);
+            break;
+        default:
+            printf("Данные некорректны\n");
+            break;
+    }
+}
+
