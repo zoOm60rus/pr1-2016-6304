@@ -58,11 +58,11 @@ int get_sum(int arr[], int n)
 
 int get_count_first_el(int arr[], int n)
 { 
-    int sum=0; 
+    int summ=0; 
     for (int i=1;i<n;i++) 
     { 
       if (arr[i]==arr[0]) 
-        sum++; 
+        summ++; 
     } 
-   return sum;
+   return summ;
 }
