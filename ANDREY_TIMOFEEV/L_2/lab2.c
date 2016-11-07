@@ -13,7 +13,7 @@ void menu(int ch, int arr[], int n){
       return; 
      case 3: printf("%d\n",get_count_first_el(arr,n)); 
       return; 
-      default: printf("Данные некорректны\n"); 
+     default: printf("Данные некорректны\n"); 
     } 
 
  } 
