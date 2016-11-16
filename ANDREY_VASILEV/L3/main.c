@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>					
+#include "text.h"			//Подключаем заголовочный файл с прототипами функций vvod и redact
+int main()
+{
+	char* input=(char*)malloc(10000*sizeof(char));   				//Объявляем переменные и выделяем под них
+	int pered, posle, k, i, *index=(int*)malloc(500*sizeof(int));   //память
+	char output[500][1000];
+	vvod(input, index, &pered, &posle);		//Заполняем массив символов и получаем количество предл. до и после
+	redact(input, index, pered, output);	//Заполняем массив предложений и печатаем результат
+	free(input);							//
+	free(index);							//Освобождаем выделенную раннее память
+	printf("Количество предложений до %d и количество предложений после %d\n", pered, posle);
+}
+
+
+
