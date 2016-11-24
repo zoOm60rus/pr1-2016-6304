@@ -1,27 +1,26 @@
-#include "stdio.h" //updated_version_2.0 (using_dinamic_arrays, minor_bug_fixes)
+#include "stdio.h" //updated_version_3.0 (using_dinamic_arrays, minor_bug_fixes)
 
 void print(char* a, int len)
 {	for (int i = (a[0] == ' ') ? 1 : 0; i < len; i++)
 		printf("%c", a[i]);
 }
 int main(){
-	char c; 
+	char c;
 	char* buf=NULL;
-	int m = 0, n = 0, len = 0, i = 0;
+	int m = 0, n = 0, len = 0;
 	while ((c = getchar()) != '!')
 	{
 		switch (c)
 		{
-		case '.':  print(buf, len); printf("%c\n", c); i = 0; m++; n++; break;
-		case ';':  print(buf, len); printf("%c\n", c); i = 0; m++; n++; break;
-		case '?':  i = 0; m++;  break;
-		case '\n': i = 0;	break;
-		case '\t': i = 0;	break;
+		case '.':  print(buf, len); printf("%c\n", c); len = 0; m++; n++; break;
+		case ';':  print(buf, len); printf("%c\n", c); len = 0; m++; n++; break;
+		case '?':  len = 0; m++;    break;
+		case '\n': len = 0;    	    break;
+		case '\t': len = 0;    	    break;
 		default:
 		{
-			len = ++i;
-			buf = (char*)realloc(buf, i * sizeof(char));
-			buf[i - 1] = c; 
+			buf = (char*)realloc(buf, (++len) * sizeof(char));
+			buf[len - 1] = c; 
 		}
 		}
 	}
