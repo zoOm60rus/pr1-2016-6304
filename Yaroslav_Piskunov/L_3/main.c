@@ -32,10 +32,17 @@ int main()
     int k = 0;
     int doo = 0, posle = 0;
     char ch;
-    char* str = (char*)malloc(100000*sizeof(char));
-    char* sen = (char*)malloc(100000*sizeof(char));
-    while ((ch=getchar())!='!')
+    int str_len = 10;
+    int sen_len = 10;
+    char* str = (char*)malloc(str_len*sizeof(char));
+    char* sen = (char*)malloc(sen_len*sizeof(char));
+    while ((ch=getchar())!='!'){
         str[i++]=ch;
+        if (i+5>str_len){
+            str_len = str_len + 10;
+            str = (char*)realloc(str, str_len*sizeof(char));
+        }
+    }
     str[i++] = ch;
     str[i] = '\0';
     i=0;
@@ -44,6 +51,11 @@ int main()
         while ((str[i]!=';')&&(str[i]!='.')&&(str[i]!='?')&&(str[i]!='!'))
         {
             sen[k++]=str[i];
+            if (k+5>sen_len){
+            sen_len = sen_len + 10;
+            sen = (char*)realloc(sen, sen_len*sizeof(char));
+        }
+
             i++;
         }
         sen[k++] = str[i];
@@ -51,7 +63,7 @@ int main()
         k=0;
         if (isQuestion(sen)!=1)
         {
-            printf("%s\n", obrabotka(sen));
+             printf("%s\n", obrabotka(sen));
             posle++;
         }
         doo++;
