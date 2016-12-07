@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -28,13 +27,13 @@ struct MusicalComposition* createMusicalCompositionList(char** array_names, char
 {
 	MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
 	MusicalComposition *prev = head;
-	MusicalComposition *current;
+	MusicalComposition *curr;
 	    for (int i = 1; i < n; ++i)
 	    {
-		    current = createMusicalComposition(array_names[i], array_authors[i], array_years[i]);
-	    	current->prev = prev;
-	    	prev->next = current;
-	    	prev = current;
+		curr = createMusicalComposition(array_names[i], array_authors[i], array_years[i]);
+	    	curr->prev = prev;
+	    	prev->next = curr;
+	    	prev = curr;
 	    }
     return head;
 }
@@ -50,32 +49,25 @@ void push(struct MusicalComposition* head, struct MusicalComposition* element)
 
 void removeEl(struct MusicalComposition*head, char*name_for_remove)
 {
-	MusicalComposition *curr = head;
-	while (curr->next)
+	while (head)
 	{
-		if (strcmp(curr->name, name_for_remove) == 0)
-			if ((curr->prev) == 0)
+		if (strcmp(head->name, name_for_remove) == 0)
+		{
+			if (head->next == NULL)
 			{
-				MusicalComposition *curr_2 = curr->next;
-				    strcpy(curr->name, curr_2->name);
-				    strcpy(curr->author, curr_2->author);
-				    curr->year = curr_2->year;
-				    curr_2->next->prev = curr;
-				    curr->next = curr_2->next;
-				free(curr_2);
+				head->prev->next = NULL;
+				return;
 			}
-			else
+			else if (head->prev == NULL)
 			{
-				curr->prev->next = curr->next;
-				curr->next->prev = curr->prev;
-				free(curr);
+				head->next->prev = NULL;
+				return;
 			}
-		curr = curr->next;
-	}
-	if ((strcmp(curr->name, name_for_remove) == 0) && (curr->next == 0))
-	{
-		curr->prev->next = NULL;
-		free(curr);
+			head->prev->next = head->next;
+			head->next->prev = head->prev;
+			break;
+		}
+		head = head->next;
 	}
 }
 
@@ -92,20 +84,18 @@ int count(struct MusicalComposition*head)
 
 void print_names(MusicalComposition *head)
 {
-	MusicalComposition *curr = head;
-	while (curr->next)
+	while (head)
 	{
-		printf("%s\n", curr->name);
-		curr = curr->next;
+		printf("%s\n", head->name);
+		head = head->next;
 	}
-	printf("%s\n", curr->name);
 }
 
 int main()
 {
 	int length;
 	scanf("%d\n", &length);
-
+	
 	char **names = (char**)malloc(sizeof(char*)*length);
 	char **authors = (char**)malloc(sizeof(char*)*length);
 	int *years = (int*)malloc(sizeof(int)*length);
