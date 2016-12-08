@@ -23,6 +23,7 @@ int main(){
     }
     printf("Количество предложений до %d и количество предложений после %d", n, m);
     return 0;
+    free(arr);
 }
 void print(char* arr, int len)
 {   for (int i = (arr[0] == ' ') ? 1 : 0; i < len; i++)
