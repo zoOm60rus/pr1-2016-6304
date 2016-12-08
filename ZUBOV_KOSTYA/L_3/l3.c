@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print(char* a, int len); //Прототип функции
+
 
 void print(char* a, int len)    //Описание функции, выводящей элементы буфера
 {	for (int i = (a[0] == ' ') ? 1 : 0; i < len; i++)
