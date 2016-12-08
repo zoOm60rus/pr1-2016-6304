@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 struct MusicalComposition {
 	char name[80];
 	char author[80];
@@ -11,34 +12,34 @@ struct MusicalComposition {
 };
 
 typedef struct MusicalComposition MusicalComposition;
-    
-struct MusicalComposition* createMusicalComposition(char *name, char* author, int year)
+
+MusicalComposition* createMusicalComposition(char *name, char* author, int year)
 {
-	struct MusicalComposition* rr = (struct MusicalComposition*)malloc(sizeof(struct MusicalComposition));
-	    strcpy(rr->name, name);
-	    strcpy(rr->author, author);
-	    rr->year = year;
-	    rr->next = NULL;
-	    rr->prev = NULL;
+	MusicalComposition* rr = (MusicalComposition*)malloc(sizeof(MusicalComposition));
+	strcpy(rr->name, name);
+	strcpy(rr->author, author);
+	rr->year = year;
+	rr->next = NULL;
+	rr->prev = NULL;
 	return rr;
 }
 
-struct MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n)
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n)
 {
 	MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
 	MusicalComposition *prev = head;
-	MusicalComposition *curr;
-	    for (int i = 1; i < n; ++i)
-	    {
-		curr = createMusicalComposition(array_names[i], array_authors[i], array_years[i]);
-	    	curr->prev = prev;
-	    	prev->next = curr;
-	    	prev = curr;
-	    }
-    return head;
+	MusicalComposition *current;
+	for (int i = 1; i < n; ++i)
+	{
+		current = createMusicalComposition(array_names[i], array_authors[i], array_years[i]);
+		current->prev = prev;
+		prev->next = current;
+		prev = current;
+	}
+	return head;
 }
 
-void push(struct MusicalComposition* head, struct MusicalComposition* element)
+void push(MusicalComposition* head, MusicalComposition* element)
 {
 	while (head->next)
 		head = head->next;
@@ -47,8 +48,10 @@ void push(struct MusicalComposition* head, struct MusicalComposition* element)
 	element->next = NULL;
 }
 
-void removeEl(struct MusicalComposition*head, char*name_for_remove)
+
+void removeEl(MusicalComposition*head, char*name_for_remove)
 {
+
 	while (head)
 	{
 		if (strcmp(head->name, name_for_remove) == 0)
@@ -63,24 +66,27 @@ void removeEl(struct MusicalComposition*head, char*name_for_remove)
 				head->next->prev = NULL;
 				return;
 			}
+
 			head->prev->next = head->next;
 			head->next->prev = head->prev;
+
 			break;
 		}
+
 		head = head->next;
 	}
-}
 
-int count(struct MusicalComposition*head)
+}
+int count(MusicalComposition*head)
 {
-	int count = 0;	
+	int count = 0;
 	while (head)
 	{
 		count++;
 		head = head->next;
 	}
 	return count;
-}
+};
 
 void print_names(MusicalComposition *head)
 {
@@ -95,7 +101,7 @@ int main()
 {
 	int length;
 	scanf("%d\n", &length);
-	
+
 	char **names = (char**)malloc(sizeof(char*)*length);
 	char **authors = (char**)malloc(sizeof(char*)*length);
 	int *years = (int*)malloc(sizeof(int)*length);
