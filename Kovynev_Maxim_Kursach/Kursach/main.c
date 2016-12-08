@@ -13,9 +13,9 @@ struct MusicalComposition {
 
 typedef struct MusicalComposition MusicalComposition;
 
-struct MusicalComposition* createMusicalComposition(char *name, char* author, int year)
+MusicalComposition* createMusicalComposition(char *name, char* author, int year)
 {
-	struct MusicalComposition* rr = (struct MusicalComposition*)malloc(sizeof(struct MusicalComposition));
+	MusicalComposition* rr = (MusicalComposition*)malloc(sizeof(MusicalComposition));
 	strcpy(rr->name, name);
 	strcpy(rr->author, author);
 	rr->year = year;
@@ -24,7 +24,7 @@ struct MusicalComposition* createMusicalComposition(char *name, char* author, in
 	return rr;
 }
 
-struct MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n)
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n)
 {
 	MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
 	MusicalComposition *prev = head;
@@ -39,7 +39,7 @@ struct MusicalComposition* createMusicalCompositionList(char** array_names, char
 	return head;
 }
 
-void push(struct MusicalComposition* head, struct MusicalComposition* element)
+void push(MusicalComposition* head, MusicalComposition* element)
 {
 	while (head->next)
 		head = head->next;
@@ -49,7 +49,7 @@ void push(struct MusicalComposition* head, struct MusicalComposition* element)
 }
 
 
-void removeEl(struct MusicalComposition*head, char*name_for_remove)
+void removeEl(MusicalComposition*head, char*name_for_remove)
 {
 
 	while (head)
@@ -77,7 +77,7 @@ void removeEl(struct MusicalComposition*head, char*name_for_remove)
 	}
 
 }
-int count(struct MusicalComposition*head)
+int count(MusicalComposition*head)
 {
 	int count = 0;
 	while (head)
@@ -124,22 +124,13 @@ void sort(MusicalComposition *head)
 void removeoddel(MusicalComposition *head)
 {
 	int i = 0;
-	MusicalComposition *temp = (MusicalComposition*)malloc(sizeof(MusicalComposition));
-	strcpy(temp->name, head->next->name); strcpy(temp->author, head->next->author); temp->year = head->next->year;
-	strcpy(head->next->name, head->name); strcpy(head->next->author, head->author); head->next->year = head->year;
-	strcpy(head->name, temp->name); strcpy(head->author, temp->author); head->year = temp->year;
-	free(temp);
-	removeEl(head, head->next->name);
-	while (head)
+		while (head)
 	{
-		i++;
-		if ((i % 2) == 0) removeEl(head, head->name);
+		if (((++i) % 2) == 0) removeEl(head, head->name);
 		head = head->next;
 	}
 
-
 }
-
 
 int main()
 {
