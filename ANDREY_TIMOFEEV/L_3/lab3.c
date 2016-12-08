@@ -1,6 +1,7 @@
 #include <stdio.h>
 void print(char* arr, int len);
 int main(){
+    char* arr2;
     char ch; 
     char* arr=NULL;
     int m = 0, n = 0, len = 0, i = 0;
@@ -16,7 +17,10 @@ int main(){
         default:
         {
             len = ++i;
-            arr = (char*)realloc(arr, i * sizeof(char));
+            arr2= (char*)realloc(arr, i * sizeof(char));
+            if (arr2!=arr) free(arr);
+            arr=arr2;
+            
             arr[i - 1] = ch; 
         }
         }
