@@ -33,7 +33,7 @@ void removeEl(MusicalComposition* head, char*name_for_remove)
 }
 }
 
-/*Функция удаления нечетныых элементов списка*/
+/*Функция удаления нечетных элементов списка*/
 void removeoddel(MusicalComposition *head)
 {
 	int i = 0;
