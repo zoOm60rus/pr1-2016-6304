@@ -8,7 +8,7 @@ int main(){
     int length, i;
 	printf("Количество элементов: ");
     scanf("%d", &length);  
-	char memes[70];
+
     char** names = (char**)malloc(sizeof(char*)*length);
     char** authors = (char**)malloc(sizeof(char*)*length);
     int* years = (int*)malloc(sizeof(int)*length);
