@@ -9,9 +9,11 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 			if (head->next == NULL){   //Если элемент последний, то текущим
 				head = head->prev; //становится предыдущий элемент, а
 				head->next = NULL; //его указатель на след. становится NULL				break;
+				break;
 			} else if (head->prev == NULL){	//Если удаляемый элемент первый, то
 				head->next->prev = NULL;	//"hold" присваивается следующий
 				hold = head->next;	//элемент списка, т.е.новое начало списка.
+				break;
 			} else {
 //В случае, когда элемент является не крайним, перемещаем указатели данным образом
 				head->next->prev = head->prev;	
