@@ -23,5 +23,5 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 		}
 		head = head->next;	/*Если строки не совпали, делаем текущим указатель на след. структуру */
 	}
-    	head = hold;  	//Возвращаем "head" сохраненное значение
+    	*head = *hold;  	//Возвращаем "head" сохраненное значение
 }
