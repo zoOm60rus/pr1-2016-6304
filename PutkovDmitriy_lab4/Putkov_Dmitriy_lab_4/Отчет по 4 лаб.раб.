@@ -1,0 +1,94 @@
+//Создание структуры
+struct MusicalComposition {
+	char *name;     // имя песни
+	char *author;   // Автор песни
+	int year;       // год выпуска
+	struct MusicalComposition* next; // указатель на след. элемент
+	struct MusicalComposition* prev; // указатель на пред. элемент
+};
+
+typedef struct MusicalComposition MusicalComposition; // присваивание структуре имя MusicalComposition
+
+MusicalComposition* createMusicalComposition(char *name, char* author, int year) // Функция создания Муз. композиции
+{
+	MusicalComposition* Composition= (MusicalComposition*)malloc(sizeof(MusicalComposition)); // Создание такой структуры с именем Composition
+	strcpy(Composition->name, name); // присвоить песне название
+    strcpy(Composition->author, author);// присвоить песне автора
+	Composition->year = year; // присвоить песне год выпуска
+	Composition->next = NULL; // присвоить песне создать указатели, которые ни на что не указывают пока.
+	Composition->prev = NULL;
+	return Composition; // вернем значение этой структуры
+}
+
+MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n) //создание плейлиста
+{
+	MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]); // создание указателя на первую структуру
+	MusicalComposition *prev = head; // указатель на пред. эл-т указывает на head
+	MusicalComposition *current; // создаем указатель, который используется только в этой функции для хождения по циклы и создания структур
+	for (int i = 1; i < n; ++i)
+	{
+		current = createMusicalComposition(array_names[i], array_authors[i], array_years[i]); //указатель на созданный плей лист
+		current->prev = prev;   //указатель структуры указывает на пред. структуру
+		prev->next = current; // указатель next предыдущей структуры указывает на настоящую структуру
+		prev = current;     // присвоить указателю на пред. структуру указатель на настоящую структуру
+	}
+	return head; // возвращает указатель на первую структуру
+}
+
+void push(MusicalComposition* head, MusicalComposition* element) // Добавить в плейлист композицию
+{
+	while (head->next)  //пока существует следующая структура
+		head = head->next; // идем по плейлисту
+	head->next = element; //дойдя до последней структуры, присваиваем ее указателю next указатель на новый эл-т.
+	element->prev = head; // указатель структуры element prev на последнюю структуру плейлиста
+	element->next = NULL; // указатель next структуры element ни на что не указывает
+}
+
+
+void removeEl(MusicalComposition*head, char*name_for_remove) // функция удаления эл-та с именем name_for_remove
+{
+
+	while (head) // пока существует структура
+	{
+		if (strcmp(head->name, name_for_remove) == 0)// если имена совпали, то смотрим, где именно
+		{
+			if (head->next == NULL) // если в конце,то
+			{
+				head->prev->next = NULL;// присвоить указателю next предпоследней структуры значение NULL
+				return; // закончить
+			}
+			else if (head->prev == NULL) // если в начале, то
+			{
+				head->next->prev = NULL; // присвоить значению указателя prev второй структуры NULL
+				return;// закончить
+			}
+
+			head->prev->next = head->next; //если в середине, то присваиваем указателю next предудущей структуры  адрес следующей структуры
+			head->next->prev = head->prev; // а указателю prev следующей структуры  адрес предыдущей структуры
+
+			break;//закончить
+		}
+
+		head = head->next;// идем по плейлисту
+	}
+
+}
+int count(MusicalComposition*head)// подсчет количества композиций в плейлисте
+{
+	int count = 0;
+	while (head) // пока существует структура
+	{
+		count++; // кол-во +1
+		head = head->next;//идем по структуре
+	}
+	return count;// возвратить кол-во композиций
+};
+
+void print_names(MusicalComposition *head) // вывод названий композиций
+{
+	while (head) // пока существует структура
+	{
+		printf("%s\n", head->name); // вывод на экран название
+		head = head->next; //идем по структуре
+	}
+}
