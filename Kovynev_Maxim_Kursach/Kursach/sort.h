@@ -1,2 +1,0 @@
-void sort(MusicalComposition *head);
-
