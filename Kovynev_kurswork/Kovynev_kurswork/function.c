@@ -103,7 +103,7 @@ void removeEl(MusicalComposition* head, char* name_for_remove, int* CreatedList)
 		/* Если находим в списке находим в списке удовлетворяющую нас позицию, то выполняем следующее:*/
                 if (strcmp(head->name, name_for_remove) == 0)
                 { 
-			/* 1-ый случай. Если элемент - едиснтвенный*/
+			/* 1-ый случай. Если элемент - единственный*/
                         if ((head->next == NULL) && (head->prev == NULL))
                         {
 				/* Удаляем список*/
