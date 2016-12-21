@@ -1,16 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "locale.h"
-#include "struct.h"
-#include "createlist.h"
-#include "function.h"
+#include "struct.h"    
+#include "createlist.h"   
+#include "function.h"     
 
 int main()
 {
-	setlocale(LC_ALL, "Russian");
-	int decision = 0;
-	int createdList = 0;
+	int decision = 0; //Переменная, отвечающая за выбор пункта меню
+	int createdList = 0;  //Переменная, отвечающая за открытие пользователю всех пунктов меню (кроме пунтка создания списка и выхода)
 	MusicalComposition *head = NULL;
 	while (decision != 9)
 	{
@@ -32,86 +30,86 @@ int main()
 		printf("  #####################################################################\n\n\n");
 
 		printf("  Choose: ");
-		scanf("%d", &decision);
+		scanf("%d", &decision); //Считываем значение, отвечающее за выбор пунка меню
 
-		switch (decision)
+		switch (decision) //Выполняем множественный выбор по переменной decision
 		{
 		case 1:
-			head = add();
-			createdList = 1;
+			head = add(); //Создаем список, используяя функцию add(), которая возвращает head
+			createdList = 1; //Открываем доступ ко всем элементам меню
 			break;
 		case 2:
-			if (createdList != 1)
+			if (createdList != 1) //Проверка на создание списка
 				CreatedList();
 			else
 			{
-				clear();
-				printf("List:\n");
-				print_names(head);
+				clear(); //Очищаем экран от интерфейса меню
+				printf("List:\n"); 
+				print_names(head); //Используя функцию print_names(), выводим все элементы списка
 				printf("\n");
-				pause();
+				pause(); //Задерживаем экран консоли 
 			}
 			break;
 		case 3:
-			if (createdList != 1)
+			if (createdList != 1) //Проверка на создание списка
 				CreatedList();
 			else
-				sort(head);
+				sort(head); //Выполняем функцию сортировки
 			break;
 		case 4:
-			if (createdList != 1)
+			if (createdList != 1) //Проверка на создание списка
 				CreatedList();
 			else
 			{
-				clear();
-				push(head);
-				printf("\nAdding elements completed successfully!\n\n");
-				pause();
+				clear(); //Очищаем экран от интерфейса меню
+				push(head); //Выполняем функцтю push() - добавляем новый элемент в конец списка
+				printf("\nAdding elements completed successfully!\n\n"); //Выводим сообщение о завершении процесса
+				pause(); //Задерживаем экран консоли 
 			}
 			break;
 		case 5:
-			if (createdList != 1)
+			if (createdList != 1)//Проверка на создание списка
 				CreatedList();
 			else
-				pushmanyel(head);
+				pushmanyel(head);//Выполняем функцтю pushmanyel() - добавляем несколько новых элементов в конец списка
 			break;
 		case 6:
-			if (createdList != 1)
+			if (createdList != 1)//Проверка на создание списка
 				CreatedList();
 			else
 			{
-				clear();
+				clear(); //Очищаем экран от интерфейса меню
 				char name_for_remove[80];
 				printf("Enter the name to be removed from the List\n");
-				scanf("%s", name_for_remove);
-				removeEl(head, name_for_remove, &createdList);
-				printf("\nRemovig completed successfully!\n\n");
-				pause();
+				scanf("%s", name_for_remove); //Считываем имя, по которому будет произведен  
+				removeEl(head, name_for_remove, &createdList); //поиск элемента, необходимого для удаления
+				printf("\nRemovig completed successfully!\n\n"); //Выводим сообщение о завершении процесса
+				pause(); //Задерживаем экран консоли 
 			}
 			break;
 		case 7:
-			if (createdList != 1)
+			if (createdList != 1)//Проверка на создание списка
 				CreatedList();
 			else
-				removeoddel(head);
+				removeoddel(head);//Выполняем функцтю removeoddel() - удаление всех нечетных элементов списка
 			break;
 		case 8:
-			if (createdList != 1)
+			if (createdList != 1)//Проверка на создание списка
 				CreatedList();
 			else
 			{
-				clear();
-				printf("Number of elements in List: %d\n\n", count(head));
-				pause();
+				clear(); //Очищаем экран от интерфейса меню
+				printf("Number of elements in List: %d\n\n", count(head)); //Выводим количество элементов в списке
+				pause();//Задерживаем экран консоли 
 			}
 			break;
-		case 9: break;
+		case 9: break; //Если decision=9, тогда произойдет выход из программы
 		default:
-			system("cls");
-			printf("There is no such option. Try again!\n\n");
-			pause();
+			clear(); //Очищаем экран от интерфейса меню
+			printf("There is no such option. Try again!\n\n"); //Выводим сообщение о ошибке, что данного пункта в меню нет
+			pause();//Задерживаем экран консоли 
 		}
 	}
-	clear();
+	clear();//Очищаем экран
 	return 0;
 }
