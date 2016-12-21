@@ -53,7 +53,7 @@ void sortirovka(MusicalComposition *head)
 		curr = head;
 		while (curr->next) //опять же перемещаемся до конца 
 		{ 
-			if (strcmp(curr->author,curr->next->author)>1) //Если авор больше то свапает 
+			if (strcmp(curr->author,curr->next->author)>0) //Если авор больше то свапает 
 				{ 
 
 					MusicalComposition *tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
