@@ -81,9 +81,7 @@ void push(MusicalComposition* head)
 
 void removeEl(MusicalComposition* head, char* name_for_remove)
 {
-	MusicalComposition *hold = NULL; 
-	char* buf = NULL;
-   	hold = head;		
+	MusicalComposition *hold = NULL; 		
     while(head)	
    	{	       
 		if (strcmp(head->name, name_for_remove)==0) 
@@ -113,14 +111,12 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 
 int count(MusicalComposition* head)  
 {									
-    MusicalComposition* hold = head; 
     int count=0;				
     while(head)			
     {			 	
          count++;			
         head = head->next;	
-    }  						 
-    head = hold; 		
+    }  						 		
 	return count;		
 };
 
@@ -130,7 +126,6 @@ void print_names(MusicalComposition* head)
 	printf("┌─────┬──────────────────────────┬─────────────────────┬─────┐\n");
 	printf("│Номер│                Композиция│          Исполнитель│  Год│\n");
 	printf("╞═════╪══════════════════════════╪═════════════════════╪═════╡\n");
-    MusicalComposition* hold = head;
     while(head)					
     {						
         printf("│%5d│%26s│%21s│%5d│\n", i++, head->name, head->author, head->year);	  
@@ -139,7 +134,6 @@ void print_names(MusicalComposition* head)
 		else printf("├─────┼──────────────────────────┼─────────────────────┼─────┤\n");
         head = head->next;	
     }  						
-    head = hold;  
 };
 
 MusicalComposition* removeYear(MusicalComposition* head)
