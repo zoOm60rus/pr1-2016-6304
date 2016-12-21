@@ -6,5 +6,6 @@ struct MusicalComposition {
         struct MusicalComposition* next; // Указатель на следующий элемент 
         struct MusicalComposition* prev; // Указатель на предыдущий элемент 
 };
+
 typedef struct MusicalComposition MusicalComposition; //Объявление типа данных MusicalComposition
 
