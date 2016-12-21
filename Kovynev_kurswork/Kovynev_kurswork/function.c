@@ -156,7 +156,7 @@ void sort(MusicalComposition *head)
         MusicalComposition *curr_i = head;
         MusicalComposition *curr_j;
 
-	/* ВЫполняем сортировку методом пузырька */
+	/* Выполняем сортировку методом пузырька */
         while (curr_i->next)
         {
                 curr_j = head;
@@ -202,7 +202,7 @@ void removeoddel(MusicalComposition *head)
         pause();
 }
 
-/* Функция вывода ошибки при отстутствии списка */
+/* Функция вывода ошибки при отсутствии списка */
 void CreatedList()
 {
         clear();
