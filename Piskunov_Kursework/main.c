@@ -52,22 +52,22 @@ void removeEl(MusicalComposition* head, char* name_for_remove){
     if  ((head->prev!=NULL)&&(head->next!=NULL))
     {
         head->prev->next = head->next;
-        head->next->prev = head->prev;
+        head->next->prev = head->prev; free(head);
     }
     else if (head->next == NULL)
     {
-        head->prev->next = NULL;
+        head->prev->next = NULL; free(head);
     }
     else if(head->prev == NULL)
     {
-        while(head->next!=NULL)
-        {
-            strcpy(head->name,head->next->name);
-            strcpy(head->author, head->next->author);
-            head->year = head->next->year;
-        }
-        head->prev->next = NULL;
-        head->prev = NULL;
+        strcpy(head->name,head->next->name);
+        strcpy(head->author, head->next->author);
+        head->year = head->next->year;
+        head = head->next;
+        head->prev->next = head->next;
+        head->next->prev = head->prev;
+        free(head);
+        
     }
 }
 
