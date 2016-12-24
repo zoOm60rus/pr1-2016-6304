@@ -79,27 +79,29 @@ void push(MusicalComposition* head)
 	end->prev = head;
 }
 
-void removeEl(MusicalComposition* head, char* name_for_remove)
+void removeEl(MusicalComposition** TrueHead, char* name_for_remove)
 {
-	MusicalComposition *hold = NULL; 		
+	MusicalComposition *head = *TrueHead; 		
     while(head)	
    	{	       
 		if (strcmp(head->name, name_for_remove)==0) 
 		{
 			if(head->next == NULL && head->prev == NULL){
-					head->year = -1;
+					free(head);
+					*TrueHead = NULL;
 					return;
 				} else	if (head->next == NULL){   
-				head->prev->next = NULL; 
+				head->prev->next = NULL;
+				free(head);
 				return;
 			} else if (head->prev == NULL){
 				head->next->prev = NULL;	
-				*head = *head->next;
-				head->next->prev = head;	
+				free(head);
 				return;
 			} else {
 				head->next->prev = head->prev;	
 				head->prev->next = head->next;
+				free(head);
 				return;
 			}
 								
@@ -144,18 +146,21 @@ MusicalComposition* removeYear(MusicalComposition* head)
 	while(head){						
 		if (head->year < k){	
 			if (head->next ==NULL && head->prev == NULL){
+				free(head);
 				return NULL;
-				break;
 			}
 			if (head->next == NULL){	
 				head->prev->next = NULL;
+				free(head);
 				break;
 			} else if (head->prev == NULL){
 				head->next->prev = NULL;	
-				start = head->next;		
+				start = head->next;
+				free(head);
 			} else {
 				head->next->prev = head->prev;	
 				head->prev->next = head->next;
+				free(head);
 			}
 		}
 		head = head->next;		
@@ -292,11 +297,12 @@ void menu()
 				printf("ВВедите имя элемента, который хотите удалить: ");
 				size = count(head);
 				name = get_name();
-				removeEl(head, name);
-				if(count(head) != size) printf("\nЭлемент удален!\n");
-				else if (head->year == -1){
-				printf ("\nУдален последний элемент списка!\n");
-				ListCreated = 0;
+				removeEl(&head, name);
+				if(head == NULL){
+					printf("\nУдален последний элемент!\n");
+					ListCreated = 0;
+				} else if (size != count(head)){
+				printf ("\nЭлемент удален!\n");
 				} else printf("\nЭлемент не удален!\n");
 				bufClean = get_name();
 				system("clear");
