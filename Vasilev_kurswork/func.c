@@ -71,6 +71,13 @@ void push(MusicalComposition* head)
 		years[i] = atoi(get_name());
     }
 	end = createMusicalCompositionList(names, authors, years, k);
+	for(i = 0; i < k; i++){
+		free(names[i]);
+		free(authors[i]);
+	}
+	free(names);
+	free(authors);
+	free(years);
     while(head->next)		
     {						
         head = head->next; 
@@ -87,15 +94,16 @@ void removeEl(MusicalComposition** TrueHead, char* name_for_remove)
 		if (strcmp(head->name, name_for_remove)==0) 
 		{
 			if(head->next == NULL && head->prev == NULL){
-					free(head);
 					*TrueHead = NULL;
+					free(head);
 					return;
 				} else	if (head->next == NULL){   
 				head->prev->next = NULL;
 				free(head);
 				return;
 			} else if (head->prev == NULL){
-				head->next->prev = NULL;	
+				head->next->prev = NULL;
+				*TrueHead = head->next;
 				free(head);
 				return;
 			} else {
@@ -188,6 +196,13 @@ MusicalComposition* AddToBegin(MusicalComposition* head)
 	MusicalComposition* NewHead;	
 	NewHead= createMusicalCompositionList(names, authors, years, k);
 	MusicalComposition* temp = NewHead;	
+	for(i = 0; i < k; i++){
+		free(names[i]);
+		free(authors[i]);
+	}
+	free(names);
+	free(authors);
+	free(years);
 	while(NewHead->next){			
 		NewHead = NewHead->next;	
 	}										
@@ -208,12 +223,15 @@ void menu()
 	int i;
 	int ListCreated = 0;
 	char* choice = "m";
-	while(choice[0] != 'q'){
+	while(choice[0] != 'q')
+	{
 		printf("Меню\n1: Создать список \n2: Отобразить список  \n3: Добавить элементы в начало списка \n");
 		printf("4: Добавить элементы в конец списка \n5: Удалить элемент\n6: Удалить элементы с годом меньше заданного\nq: Выход\n\nВведите команду: ");
 		choice = get_name();
 		system("clear");
-		switch(choice[0]){
+		switch(choice[0])
+
+		{
 			case '1':
 				if(ListCreated){
 					printf("\n\n\n\nВаш старый список будет удален! Продолжить? (y/n): ");
@@ -241,6 +259,13 @@ void menu()
     			}
 				head = createMusicalCompositionList(names, authors, years, length);
 				ListCreated = 1;
+				for (i = 0; i <length; i++){
+					free(names[i]);
+					free(authors[i]);
+				}
+				free(names);
+				free(years);
+				free(authors);
 				system("clear");
 				printf("\n\n\n\n");
 				break;
@@ -302,7 +327,7 @@ void menu()
 					printf("\nУдален последний элемент!\n");
 					ListCreated = 0;
 				} else if (size != count(head)){
-				printf ("\nЭлемент удален!\n");
+					printf ("\nЭлемент удален!\n");
 				} else printf("\nЭлемент не удален!\n");
 				bufClean = get_name();
 				system("clear");
