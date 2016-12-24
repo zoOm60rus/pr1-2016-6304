@@ -8,7 +8,7 @@ MusicalComposition* createMusicalCompositionList(char**, char**, int*, int);
 
 void push(MusicalComposition*);
 
-void removeEl(MusicalComposition*, char*);
+void removeEl(MusicalComposition**, char*);
 
 int count(MusicalComposition*);
 
