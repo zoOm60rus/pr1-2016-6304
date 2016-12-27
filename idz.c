@@ -28,13 +28,14 @@ MusicalComposition* Propis(MusicalComposition *head) {
         return head;
 }
 
-void dobavlenie(struct MusicalComposition* head)
+void dobavlenie(struct MusicalComposition* head) 
 {
 
-        int i=0;
-        while(head->next)
-                head = head->next;
-        for ( i = 0; i<3; i++)
-                push(struct MusicalComposition* head, MusicalComposition* element);
+	int i=0;
+	while(head->next)
+		head = head->next;
+	for ( i = 0; i<3; i++)
+		push(head, createMusicalComposition("Default","Default", i));
 }
+		
 
