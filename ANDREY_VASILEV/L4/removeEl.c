@@ -24,6 +24,7 @@ void removeEl(MusicalComposition** TrueHead, char* name_for_remove)
 				head->next->prev = head->prev;	
 				head->prev->next = head->next;
 				free(head);
+				break;
 			}
 								
 		}
