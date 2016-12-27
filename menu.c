@@ -29,45 +29,47 @@ int main(){
     while (a!=0){
 
         printf("Выберите действие: \n");
-        printf("0. Выйти\n1. Добавить одну композицию\n2. Добавить несколько композиций \n3. Удалить композицию\n4. Список композиций\n5. Количество композиций\n6. Перезаписать автора композиции с прописными буквами\n7. Добавить 3 композиции в конец списка\n");
+         printf("0. Выйти\n1. Добавить одну композицию\n2. Добавить несколько композиций \n3. Удалить композицию\n4. Список композиций\n5. Количество композиций\n6. Перезаписать автора композиции с прописными буквами\n7. Добавить 3 композиции в конец списка\n -----------:");
         scanf("%d", &a);
          printf("-------------------------------------------------\n");
         switch (a){
             case 0: break;
             
-            case 1: printf("Введите название композиции, ее автора и год ее создания: "); 
-                scanf("%s %s %d", name, author, &year);
-                push(head, createMusicalComposition(name, author, year));
-                break;
-             
-            case 2: printf("Сколько композиций вы хотите добавить?\n");
-                scanf("%d", &t);
-                for(i=0;i<t;i++){
-                printf("Введите название композиции, ее автора и год ее создания: ");
-                scanf("%s %s %d", name, author, &year);
-                push(head, createMusicalComposition(name, author, year));
-                }
+	    case 1: printf("Введите название композиции, ее автора и год ее создания: "); //просим ввести название, автора и год написания композиции
+                scanf("%s %s %d", name, author, &year);//записываем значения
+                push(head, createMusicalComposition(name, author, year));//обращаемся к функции push
                 break;
             
-            case 3: printf("Введите название композиции: ");
+	    case 2: printf("Сколько композиций вы хотите добавить?\n");
+            	scanf("%d", &t);//записываем количество композиций для добавления
+            	for(i=0;i<t;i++){
+            	printf("Введите название композиции, ее автора и год ее создания: ");//просим ввести название, автора и год написания композиции
+                scanf("%s %s %d", name, author, &year);//записываем значения
+                push(head, createMusicalComposition(name, author, year));//обращаемся к функции push
+            	}
+            	break;
+            
+	    case 3: printf("Введите название композиции: ");
                 scanf("%s", name);
                 removeEl(head, name);
                 break;
             
-            case 4: print_names(head);
+	    case 4: print_names(head); 
                 break;
-
-            case 5: printf("Количество композиций в списке %d\n", count(head));
+	
+	    case 5: printf("Количество композиций в списке %d\n", count(head));
+		break;
+	    
+	    case 6: Propis(head);
                 break;
-
-            case 6: Propis(head);
-                break;
-            case 7: dobavlenie(MusicalComposition *head)
-
+	    case 7: dobavlenie(head);
+		break;
+	
             default: printf("Дейсвие не существует"); break;
         }
          printf("-------------------------------------------------\n");
     }
     return 0;
 
+}
 }
