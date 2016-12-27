@@ -15,7 +15,7 @@ void removeEl(MusicalComposition** TrueHead, char* name_for_remove)
 				free(head); //его указатель на след. становится NULL				break;
 				break;
 			} else if (head->prev == NULL){	//Если удаляемый элемент первый, то
-				head->next->prev = NULL;	//"hold" присваивается следующий
+				head->next->prev = NULL;	//"TrueHead" присваивается следующий
 				*TrueHead = head->next;	//элемент списка, т.е.новое начало списка.
 				free(head);
 				break;
