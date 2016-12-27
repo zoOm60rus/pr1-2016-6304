@@ -44,19 +44,19 @@ void push(MusicalComposition* head)
         char name_for_push[80];
         char author_for_push[80];
         int year_for_push;
-	/* Считываем имя, автора и год на добавление*/
+
         printf("Enter name, author and year (using spaces):\n");
         scanf("%s %s %d", name_for_push, author_for_push, &year_for_push);
 
-	/* Выделяем память под новый элемент*/
+
         MusicalComposition *element = createMusicalComposition(name_for_push, author_for_push, year_for_push);
         MusicalComposition *current = head;
 	
-	/* Передвигаем указатель в конец списка */
+
         while (current->next)
                 current = current->next;
 	
-	/* Добавляем элемент в конец списка и устанавливаем связь*/
+
         current->next = element;
         element->prev = current;
         element->next = NULL;
