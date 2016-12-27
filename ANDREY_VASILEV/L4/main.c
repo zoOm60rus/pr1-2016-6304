@@ -47,7 +47,7 @@ int main(){
     push(head, element_for_push);
     k = count(head);
     printf("%d\n", k);
-    removeEl(head, name_for_remove); 
+    removeEl(&head, name_for_remove); 
     print_names(head);
     k = count(head);
     printf("%d\n", k);

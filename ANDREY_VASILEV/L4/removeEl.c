@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "struct.h"
 
 void removeEl(MusicalComposition** TrueHead, char* name_for_remove)
