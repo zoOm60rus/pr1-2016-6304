@@ -13,26 +13,6 @@ struct MusicalComposition {
 
 typedef struct MusicalComposition MusicalComposition;
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-                head = head->next;
-
-
-struct MusicalComposition {
-        char name[80];
-        char author[80];
-        int year;
-        struct MusicalComposition* next;
-        struct MusicalComposition* prev;
-};
-
-typedef struct MusicalComposition MusicalComposition;
-
-MusicalComposition* createMusicalComposition(char *name, char* author, int year)
-{
-        MusicalComposition* new_song = (MusicalComposition*)malloc(sizeof(MusicalComposition));
-        strcpy(new_song->name, name);
 MusicalComposition* createMusicalComposition(char *name, char* author, int year)
 {
         MusicalComposition* new_song = (MusicalComposition*)malloc(sizeof(MusicalComposition));
