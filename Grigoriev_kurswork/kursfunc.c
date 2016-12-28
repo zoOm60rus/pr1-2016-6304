@@ -27,7 +27,7 @@ void push3el(MusicalComposition*head)
 		{
 			head->next = NULL; //Делаем текущий элемент последним 
 			for (int i = 0; i < 3; i++) //Трижды добавляем в "конец" элементы 
-				push(head, createMusicalComposition("DSADAS", "asdassaD", i));
+				push(head, createMusicalComposition("something", "somebody", i));
 			while (head->next) // Идем до последнего вставленного элемента 
 				head = head->next;
 			/* Восстанавляваем связь и двигаем указатель
