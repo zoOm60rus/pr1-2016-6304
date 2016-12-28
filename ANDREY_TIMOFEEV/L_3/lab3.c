@@ -33,3 +33,4 @@ void print(char* arr, int len)
 {   for (int i = (arr[0] == ' ') ? 1 : 0; i < len; i++)
 
         printf("%c", arr[i]);
+}
