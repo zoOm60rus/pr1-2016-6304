@@ -1,32 +1,6 @@
+#include "MusicalComposition_API.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-/* Структура "Музыкальная композиция */
-struct MusicalComposition {
-	char name[80];		// Название композиции 
-	char author[80];	// Автор композиции 
-	int year;		// Год написания композиции 
-	struct MusicalComposition* next;	// Указатель на следующий элемент 
-	struct MusicalComposition* prev;	// Указатель на предыдущий элемент 
-};
-
-struct MusicalComposition * createMusicalComposition(char *name, char* author, int year);
-
-struct MusicalComposition * createMusicalCompositionList(char** array_names, char** array_authors, int*array_years, int n);
-
-void push(struct MusicalComposition* head, struct MusicalComposition * element);
-
-void removeEl(struct MusicalComposition* head, char* name_for_remove);
-
-int count(struct MusicalComposition * head);
-
-void print_names(struct MusicalComposition*head);
-
-int main() {
-
-}
+/* Функции на добавление */
 
 /* Функция создания и инициализации нового экземпляра структуры "MusicalComposition" */
 struct MusicalComposition* createMusicalComposition(char *name, char* author, int year) {
@@ -49,7 +23,7 @@ struct MusicalComposition* createMusicalComposition(char *name, char* author, in
 struct MusicalComposition* createMusicalCompositionList(char** array_names, char** array_authors, int* array_years, int n) {
 
 	/* Указатель на первый элемент, который вернет функция */
-	struct MusicalComposition*head =NULL;
+	struct MusicalComposition*head = NULL;
 	/* Указатель для движения по списку */
 	struct MusicalComposition*ptr = NULL;
 	/* Фиктивный указатель для работы со списком */
@@ -61,7 +35,7 @@ struct MusicalComposition* createMusicalCompositionList(char** array_names, char
 	{
 		/* Выделяем память для нового элемента */
 		ptr = (struct MusicalComposition*)malloc(sizeof(struct MusicalComposition));
-		
+
 		/* Создаим первый элемент отдельно чтобы вернуть head */
 		if (i == 0)
 		{
@@ -97,7 +71,7 @@ struct MusicalComposition* createMusicalCompositionList(char** array_names, char
 
 /* Добавление элемента в конец списка */
 void push(struct MusicalComposition* head, struct MusicalComposition* element)
-{
+{	
 	/* Двигаем указатель до последнего элемента */
 	while (head->next)
 		head = head->next;
@@ -109,65 +83,4 @@ void push(struct MusicalComposition* head, struct MusicalComposition* element)
 	element->prev = head;
 
 	element->next = NULL;
-}
-
-/* Функция удаления элемента */
-void removeEl(struct MusicalComposition*head, char*name_for_remove)
-{
-	/* Пока не конец списка двигаем указатель и сравниваем строки */
-	while (head)
-	{
-		if (strcmp(head->name, name_for_remove) == 0)
-		{
-			/* Если элемент, который надо удалить последний то разрываем связь с предыдущим */
-			if (head->next == NULL)
-			{
-				head->prev->next = NULL;
-				return;
-			}
-			
-			/* Если элемент, который надо удалить первый то разрываем связь со следующим 
-			Указатель на первый элемент меняем на второй элемент*/
-			else if (head->prev == NULL)
-			{
-				head->next->prev = NULL;
-				*head = *head->next;
-				return;
-			}
-			
-			/* Меняем значения поля next у предыдущего элемента */
-			head->prev->next = head->next;
-			/* Меняем значение поля prev у следующего элемента */
-			head->next->prev = head->prev;
-			
-			break;
-		}
-		
-		head = head->next;
-	}
-
-}
-
-/* Подсчет элементов списка */
-int count(struct MusicalComposition*head)
-{
-	int count = 0;
-	
-	while (head)
-	{
-		count++;
-		head = head->next;
-	}
-
-	return count;
-}
-
-/* Печать имен */
-void print_names(struct MusicalComposition* head)
-{
-	while (head)
-	{
-		printf("%s \n", head->name);
-		head = head->next;
-	}
 }
