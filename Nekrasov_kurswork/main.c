@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include<locale.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+#include <locale.h> 
 
 
-// Описание структуры MusicalComposition
+// Описание структуры MusicalComposition 
 typedef struct MusicalComposition {
 	char* name;
 	char* author;
@@ -13,7 +13,7 @@ typedef struct MusicalComposition {
 	struct MusicalComposition *prev;
 } MusicalComposition;
 
-// Создание структуры MusicalComposition
+// Создание структуры MusicalComposition 
 
 MusicalComposition* createMusicalComposition(char* name, char* author, int year) {
 	MusicalComposition* song = (MusicalComposition*)malloc(sizeof(MusicalComposition));
@@ -25,7 +25,7 @@ MusicalComposition* createMusicalComposition(char* name, char* author, int year)
 	return song;
 }
 
-// Функции для работы со списком MusicalComposition
+// Функции для работы со списком MusicalComposition 
 
 MusicalComposition *createMusicalCompositionList(char **array_names, char **array_authors, int *array_years, int n) {
 	MusicalComposition *head = createMusicalComposition(array_names[0], array_authors[0], array_years[0]);
@@ -123,41 +123,58 @@ void removeUnevenEls(MusicalComposition* head) {
 	}
 }
 
-void sortirovka(MusicalComposition *head)
-{
-	int i = count(head);
-	int k = 0;
-	MusicalComposition *curr; // Создаём дополнительный указатель, для перемещения по списку 
+void swap(MusicalComposition* a, MusicalComposition* b) {
+	if (a->prev == NULL) {
+		MusicalComposition* temp = (MusicalComposition*)malloc(sizeof(MusicalComposition));
+		temp->name = b->name;
+		temp->author = b->author;
+		temp->year = b->year;
+		b->name = a->name;
+		b->author = a->author;
+		b->year = a->year;
+		a->name = temp->name;
+		a->author = temp->author;
+		a->year = temp->year;
 
-	while (head->prev)
-		head = head->prev;
-
-	while (head->next) //Перемещаемся до конца списка 
-	{
-		curr = head;
-		while (curr->next) //опять же перемещаемся до конца 
-		{
-			if (strcmp(curr->author, curr->next->author)>0) //Если авор больше то свапает 
-			{
-
-				MusicalComposition *tmp = curr; //Выделяем память для доп. переменной 
-				strcpy(tmp->name, curr->next->name); strcpy(tmp->author, curr->next->author); tmp->year = curr->next->year; //функция 
-				strcpy(curr->next->name, curr->name); strcpy(curr->next->author, curr->author); curr->next->year = curr->year; //для 
-				strcpy(curr->name, tmp->name); strcpy(curr->author, tmp->author); curr->year = tmp->year; //свапа 
-
-																										  //free(tmp);//освобождаем память 
-			}
-			curr = curr->next; //продвигаемся 
-		}
-		head = head->next; //продвигаемся 
 	}
+	else {
+		a->next = b->next;
+		b->prev = a->prev;
 
-
+		if (a->next != NULL) {
+			a->next->prev = a;
+		}
+		if (b->prev != NULL) {
+			b->prev->next = b;
+		}
+		b->next = a;
+		a->prev = b;
+	}
+	return;
 }
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
+void sortirovka(MusicalComposition* head) {
+	MusicalComposition* current;
+	MusicalComposition* next;
+	if (head != NULL) {
+		current = head;
+		next = current->next;
+		int len = count(head);
+		for (int i = 0; i<len; ++i) {
+			current = head;
+			next = current->next;
+			for (int j = 0; j<len - i - 1; ++j) {
+				if
+					(strcmp(current->author, next->author)>0)
+					swap(current, next);
+				current = current->next;
+				next = next->next;
+			}
+		}
+	}
+}
+
 int main() {
 	setlocale(LC_ALL, "Russian");
 	int length; int a = 1, year;
@@ -190,17 +207,17 @@ int main() {
 		switch (a) {
 		case 0: break;
 		case 1:
-			printf("Введите имя, автора и год: "); //просим ввести название, автора и год написания композиции
-			scanf("%s %s %d", name, author, &year);//записываем значения
-			push(head, createMusicalComposition(name, author, year));//обращаемся к функции push
+			printf("Введите имя, автора и год: "); //просим ввести название, автора и год написания композиции 
+			scanf("%s %s %d", name, author, &year);//записываем значения 
+			push(head, createMusicalComposition(name, author, year));//обращаемся к функции push 
 			break;
 		case 2:
 			printf("Количество композиций на добавление\n");
-			scanf("%d", &t);//записываем количество композиций для добавления
+			scanf("%d", &t);//записываем количество композиций для добавления 
 			for (i = 0;i<t;i++) {
-				printf("Введите имя, автора и год: ");//просим ввести название, автора и год написания композиции
-				scanf("%s %s %d", name, author, &year);//записываем значения
-				push(head, createMusicalComposition(name, author, year));//обращаемся к функции push
+				printf("Введите имя, автора и год: ");//просим ввести название, автора и год написания композиции 
+				scanf("%s %s %d", name, author, &year);//записываем значения 
+				push(head, createMusicalComposition(name, author, year));//обращаемся к функции push 
 			}
 			break;
 		case 3:
