@@ -62,33 +62,53 @@ void push(MusicalComposition* head)
         element->next = NULL;
 }
 
-void removeEl(MusicalComposition*head, char*name_for_remove)
+void removeEl(MusicalComposition* head, char* name_for_remove, int* CreatedList)
 {
-
+	
         while (head)
         {
+		
                 if (strcmp(head->name, name_for_remove) == 0)
-                {
-                        if (head->next == NULL)
+                { 
+			
+                        if ((head->next == NULL) && (head->prev == NULL))
                         {
-                                head->prev->next = NULL;
+				/* Удаляем список*/
+                                free(head);
+                                head=NULL;
+				
+                                printf("\nYou removed the last element in the List\nTo continue use this programm create new List!\n");
+                                *CreatedList = 0;
                                 return;
                         }
-                        else if (head->prev == NULL)
+			
+			
+                        else if ((head->prev == NULL) && (head->next))
                         {
-                                head->next->prev = NULL;
+				
+                                *head = *head->next;
+                                head->prev = NULL;
                                 return;
                         }
+			
 
-                        head->prev->next = head->next;
-                        head->next->prev = head->prev;
-
-                        break;
+                        else if ((head->next == NULL) && (head->prev))
+                        {
+				/*Смещаем назад указатель на предыдущий элемент*/
+                                head = head->prev;
+                                head->next = NULL;
+                                return;
+                        }
+			
+                        else if ((head->next) && (head->prev))
+                        {
+                                head->next->prev = head->prev;
+                                head->prev->next = head->next;
+                                return;
+                        }
                 }
-
                 head = head->next;
         }
-
 }
 int count(MusicalComposition*head)
 {
