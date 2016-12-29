@@ -128,32 +128,31 @@ void sortirovka(MusicalComposition *head)
 	int i = count(head);
 	int k = 0;
 	MusicalComposition *curr; // Создаём дополнительный указатель, для перемещения по списку 
-	MusicalComposition *tmp;
-	
-		while (head->prev)
-			head = head->prev;
+	while (head->prev)
+		head = head->prev;
 
-		while (head->next) //Перемещаемся до конца списка 
+	while (head->next) //Перемещаемся до конца списка 
+	{
+		curr = head;
+		while (curr->next) //опять же перемещаемся до конца 
 		{
-			curr = head;
-			while (curr->next) //опять же перемещаемся до конца 
+			if (strcmp(curr->author, curr->next->author)>0) //Если авор больше то свапает 
 			{
-				if (strcmp(curr->author, curr->next->author)>0) //Если авор больше то свапает 
-				{
 
-					tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
-					strcpy(tmp->name, curr->next->name); strcpy(tmp->author, curr->next->author); tmp->year = curr->next->year; //функция 
-					strcpy(curr->next->name, curr->name); strcpy(curr->next->author, curr->author); curr->next->year = curr->year; //для 
-					strcpy(curr->name, tmp->name); strcpy(curr->author, tmp->author); curr->year = tmp->year; //свапа 
+				MusicalComposition *tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
+				tmp = curr;
+				strcpy(tmp->name, curr->next->name); strcpy(tmp->author, curr->next->author); tmp->year = curr->next->year; //функция 
+				strcpy(curr->next->name, curr->name); strcpy(curr->next->author, curr->author); curr->next->year = curr->year; //для 
+				strcpy(curr->name, tmp->name); strcpy(curr->author, tmp->author); curr->year = tmp->year; //свапа 
 
-					free(tmp);//освобождаем память 
-				}
-				curr = curr->next; //продвигаемся 
+				free(tmp);//освобождаем память 
 			}
-			head = head->next; //продвигаемся 
+			curr = curr->next; //продвигаемся 
 		}
-		
-	
+		head = head->next; //продвигаемся 
+	}
+
+
 }
 
 #include <stdlib.h>
