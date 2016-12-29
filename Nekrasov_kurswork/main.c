@@ -141,7 +141,7 @@ void sortirovka(MusicalComposition *head)
 				if (strcmp(curr->author, curr->next->author)>0) //Если авор больше то свапает 
 				{
 
-					MusicalComposition *tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
+					tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
 					strcpy(tmp->name, curr->next->name); strcpy(tmp->author, curr->next->author); tmp->year = curr->next->year; //функция 
 					strcpy(curr->next->name, curr->name); strcpy(curr->next->author, curr->author); curr->next->year = curr->year; //для 
 					strcpy(curr->name, tmp->name); strcpy(curr->author, tmp->author); curr->year = tmp->year; //свапа 
