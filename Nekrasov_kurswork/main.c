@@ -128,6 +128,7 @@ void sortirovka(MusicalComposition *head)
 	int i = count(head);
 	int k = 0;
 	MusicalComposition *curr; // Создаём дополнительный указатель, для перемещения по списку 
+	MusicalComposition *tmp;
 	
 		while (head->prev)
 			head = head->prev;
