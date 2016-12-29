@@ -92,8 +92,8 @@ void removeEl(MusicalComposition* head, char* name_for_remove)
 			
             /*Ниже меняем указатели узлов, чтобы они указывали на предыдущий и следующий элемент относительно 
             удаленного (элемент после пред. будет след., элемент перед след. будет пред.)*/
-			head->prev->next = head->next; 
-			head->next->prev = head->prev;
+			else head->next->prev = head->prev;
+			head->prev->next = head->next; 			
 			break;
 		}
 		head = head->next; //Ход по узлам списка
