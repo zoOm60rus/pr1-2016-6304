@@ -128,6 +128,7 @@ void sortirovka(MusicalComposition *head)
 	int i = count(head);
 	int k = 0;
 	MusicalComposition *curr; // Создаём дополнительный указатель, для перемещения по списку 
+
 	while (head->prev)
 		head = head->prev;
 
@@ -139,13 +140,12 @@ void sortirovka(MusicalComposition *head)
 			if (strcmp(curr->author, curr->next->author)>0) //Если авор больше то свапает 
 			{
 
-				MusicalComposition *tmp = (MusicalComposition*)malloc(sizeof(MusicalComposition)); //Выделяем память для доп. переменной 
-				tmp = curr;
+				MusicalComposition *tmp = curr; //Выделяем память для доп. переменной 
 				strcpy(tmp->name, curr->next->name); strcpy(tmp->author, curr->next->author); tmp->year = curr->next->year; //функция 
 				strcpy(curr->next->name, curr->name); strcpy(curr->next->author, curr->author); curr->next->year = curr->year; //для 
 				strcpy(curr->name, tmp->name); strcpy(curr->author, tmp->author); curr->year = tmp->year; //свапа 
 
-				free(tmp);//освобождаем память 
+																										  //free(tmp);//освобождаем память 
 			}
 			curr = curr->next; //продвигаемся 
 		}
