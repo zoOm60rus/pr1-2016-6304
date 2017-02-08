@@ -1,7 +1,7 @@
 // Задачи 08.02.2017.cpp : Defines the entry point for the console application.
 //
 
-// Задача 1.2
+// Задача 1.4
 #include "stdafx.h"
 #include "stdio.h"
 #include "windows.h"
