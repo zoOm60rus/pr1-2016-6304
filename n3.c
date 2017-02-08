@@ -4,14 +4,14 @@
 
 int main()
 {
-	char str[100], c;
+	char s[100], c;
 	int x=0;
 	printf("Vvedite stroku, zatem neobhodimiy simvol: \n");
-	scanf("%s %c", str, &c);
-	int n=strlen(str);
+	scanf("%s %c", s, &c);
+	int n=strlen(s);
 	for (int i=0; i<n; i++)
 	{
-		if (c == str[i])
+		if (c == s[i])
 			x++;
 	}
 	printf("%d \n",x);
