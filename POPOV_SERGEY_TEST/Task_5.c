@@ -4,17 +4,18 @@
 
 int main()
 {
-	int i;
-	int min;
-	int max;
-	int len;
-	int dif;
-	scanf("%d", &len);
-	int* array = (int*)malloc(len*sizeof(int));
-	for (i = 0; i<len; i++)
+	int len,min,max,dif;
+	int i = 0;
+	int array[256];
+	char c;
+
+	while ((c = getchar()) != '\n')
 	{
-		scanf("%d", &array[i]);
+		array[i] = atoi(&c);
+		i++;
 	}
+	len = i;
+
 	min = array[0];
 	max = array[0];
 	for (i = 1; i<len; i++)
@@ -29,6 +30,6 @@ int main()
 		}
 	}
 	dif = max - min;
-	printf("%d", dif);
+	printf("%d\n", dif);
 	return 0;
 }
