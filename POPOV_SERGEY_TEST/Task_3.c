@@ -6,7 +6,7 @@ int main()
 {
 	int i = 0;
 	char c;
-	char* str = (char*)malloc(256*sizeof(char));
+	char str[256];
 	int j = 0;
 	scanf ("%c", &c);
 	scanf ("%s", str);
