@@ -13,7 +13,9 @@ int main()
 	for (i; i<strlen(str); i++)
 	{
 		if (str[i]==c)
-		j++;
+		{
+			j++;
+		}
 	}
 	printf("%d\n", j);
 	return 0;
