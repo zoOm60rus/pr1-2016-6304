@@ -3,12 +3,25 @@
 
 int main()
 {
-    long int a, c=1, b, i;
+    long int a, b, i;
+    float c=1, t=1;
     scanf("%d %d",&a,&b);
-    for (i=0; i<b; i++)
+    if (b>0)
     {
-        c*=a;
+        for (i=0; i<b; i++)
+        {
+            c*=a;
+        }
     }
-    printf("%d", c);
+    if (b<0)
+    {
+        b=abs(b);
+        for (i=0; i<b; i++)
+        {
+            t=t/a;
+        }
+        c=t;
+    }
+    printf("%f", c);
     return 0;
 }
