@@ -31,7 +31,12 @@ int main()
 	for (int i = 0; i < length; i++)
 	{
 		printf("¬ведите название композиции затем автора и год создани€\n");
-		scanf("%s%s%d", name, author, &year);
+		
+		/* ќчистим поток ввода */
+		while (getchar() != '\n');
+		fgets(name, 80, stdin);
+		fgets(author, 80, stdin);
+		scanf("%d", &year);
 
 		names[i] = (char*)malloc(sizeof(char*) * (strlen(name) + 1));
 		authors[i] = (char*)malloc(sizeof(char*) * (strlen(author) + 1));
@@ -85,13 +90,24 @@ int main()
 				
 				/* ќтдельно создадим первый элемент списка */
 				printf("¬ведите название композиции затем автора и год создани€\n");
-				scanf("%s%s%d", name, author, &year);
+				
+				/* ќчистим поток ввода */
+				while (getchar() != '\n');
+				fgets(name, 80, stdin);
+				fgets(author, 80, stdin);
+				scanf("%d", &year);
+
 				main_head = createMusicalComposition(name, author, year);
 				
 				for (int i = 0; i < length-1; i++)
 				{
 					printf("¬ведите название композиции затем автора и год создани€\n");
-					scanf("%s%s%d", name, author, &year);
+					
+					/* ќчистим поток ввода */
+					while (getchar() != '\n');
+					fgets(name, 80, stdin);
+					fgets(author, 80, stdin);
+					scanf("%d", &year);
 
 					push(main_head, createMusicalComposition(name, author, year));
 				}
@@ -104,7 +120,12 @@ int main()
 			case 1:
 			{
 				printf("¬ведите название композиции затем автора и год создани€, которую хотите добавить в список\n");
-				scanf("%s%s%d", name, author, &year);
+				
+				/* ќчистим поток ввода */
+				while (getchar() != '\n');
+				fgets(name, 80, stdin);
+				fgets(author, 80, stdin);
+				scanf("%d", &year);
 
 				push(main_head, createMusicalComposition(name, author, year));
 
@@ -113,7 +134,10 @@ int main()
 			case 2:
 			{
 				printf("¬ведите название композиции, которую хотите удалить\n");
-				scanf("%s", name);
+				
+				/* ќчистим поток ввода */
+				while (getchar() != '\n');
+				fgets(name, 80, stdin);
 				
 				removeEl(main_head, name);
 
@@ -122,7 +146,10 @@ int main()
 			case 3:
 			{
 				printf("¬ведите название композициий, которые хотите удалить\n");
-				scanf("%s", name);
+				
+				/* ќчистим поток ввода */
+				while (getchar() != '\n');
+				fgets(name, 80, stdin);
 				
 				removeAllEl(main_head, name);
 				
