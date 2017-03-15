@@ -2,7 +2,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-int comp (const void * w1, const void * w2) //функция для сравнения элемента массива с искомым словом 
+int comp (const char * w1, const char * w2) //функция для сравнения элемента массива с искомым словом 
 { 
 return strcmp((char*)w1, (char*)w2); //сравнение 2х строк
 } 
