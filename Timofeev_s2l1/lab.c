@@ -4,7 +4,7 @@
 
 int comp (const void * w1, const void * w2) //функция для сравнения элемента массива с искомым словом 
 { 
-return strcmp((char*)w1, (char*)w2); //сравнение 2х указателей 
+return strcmp((char*)w1, (char*)w2); //сравнение 2х строк
 } 
 
 int main() { 
