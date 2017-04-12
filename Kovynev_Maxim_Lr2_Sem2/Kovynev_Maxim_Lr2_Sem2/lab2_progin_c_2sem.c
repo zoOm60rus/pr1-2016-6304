@@ -84,7 +84,7 @@ int main()
 		if (!(strcmp(string, "push")))
 		{
 			int value = 0;
-			scanf(" %d", &value);     // Считывание добавляемого значения
+			scanf("%d", &value);     // Считывание добавляемого значения
 			push(&head, value);			 // Если команда push - выполняем push();
 		}
 		else if (!(strcmp(string, "pop\n")))
