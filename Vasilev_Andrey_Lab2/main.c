@@ -32,6 +32,28 @@ int check_correction(char* choice, int* value)
 	return 0; //Во всех остальных случаях возвращается 0. 
 }
 
+int* pop(int* stack, int* len)
+{
+ (*len) --;
+    return stack;
+}
+
+void top(int* stack, int len){
+	printf("%d\n", stack[len-1]);
+}
+
+void size(int len)
+{
+ printf("%d\n", len);   
+}
+
+int* push (int* stack, int * len, int el)
+{
+    stack[(*len)] = el;
+    (*len)++;
+    printf("ok\n");
+    return stack;
+}
 int main()
 {
 	int pushing_value = 0; //Добавляемый элемент
@@ -53,10 +75,10 @@ int main()
 		switch(check_correction(choice, &pushing_value))
 		{
 			case 1:    //команда pop
-				if(len) 
+				if (len) 
 				{
-					printf("%d\n", stack[len-1]);
-					len--;
+                    printf("%d\n", stack[len-1]);
+                    stack = pop(stack, &len);
 				} 
 				else //Если стек пуст, то программа завершает работу.
 				{
@@ -67,8 +89,11 @@ int main()
 
 			case 2:    //команда top
 				if(len)
-					printf("%d\n", stack[len-1]); //вывод верхнего элемента стека
-				else
+                {
+                    top(stack, len);
+					//printf("%d\n", stack[len-1]); //вывод верхнего элемента стека
+                }
+                else
 				{
 					printf("error\n");
 					return 0;
@@ -76,18 +101,17 @@ int main()
 				break;
 
 			case 3:   //команда size
-				printf("%d\n", len);	
+				size(len);	
 				break;
 
 			case 4:  //команда exit
 				printf("bye\n");
-				free(stack);
+                free(stack);
 				return 0;
 				break;
 
 			case 5: //команда push
-				stack[len++] = pushing_value; 
-				printf("ok\n");
+				stack = push(stack, &len, pushing_value);
 				break;
 
 			case 0:    //при вводе некорректной команды или 
