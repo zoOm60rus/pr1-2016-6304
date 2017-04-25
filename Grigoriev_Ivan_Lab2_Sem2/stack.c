@@ -16,7 +16,6 @@ void push(Node_t **head, int value) {
 
 void pop(Node_t **head){ //snimaet element s vershini steka, peremeshaya vershinu k sled elemntu
     Node_t *out;
-    int value;
     out=*head; //zapominaem staruyu golovu
     *head=(*head)->next; //prisvaevaem golove noviy adress
     free(out);
