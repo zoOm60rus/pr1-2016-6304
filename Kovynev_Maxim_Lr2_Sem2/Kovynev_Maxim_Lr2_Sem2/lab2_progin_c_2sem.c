@@ -11,9 +11,9 @@ struct Stack				 // Структура, описывающая стек
 typedef struct Stack Stack;  // Объявление типа данный Stack
 
 int go = 1;			// Переменная выхода из программы
-					// 1 - ошибок не обнаружено, 0 - присутствует ошибка
+				// 1 - ошибок не обнаружено, 0 - присутствует ошибка
 
-					/* Добавление элемента в стек */
+/* Добавление элемента в стек */
 void push(struct Stack **head, int value)
 {
 	struct Stack *tmp = (Stack*)malloc(sizeof(struct Stack));
