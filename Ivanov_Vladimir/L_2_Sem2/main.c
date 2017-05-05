@@ -20,10 +20,10 @@ stack *push(stack *up, int n){
     return newup;
 }
 
-stack* pop(stack *up){
-    stack* befup = up->prev;
-    free(up);
-    return befup;
+void pop(stack **up){
+    stack* befup=*up;
+    *up = (*up)->prev;
+    free(befup);
 }
 
 int main(){
@@ -40,9 +40,9 @@ int main(){
     }
     else if(k>=2){
       e2=up->numb; //записываем верхний
-      up=pop(up); //спускаемся вниз
+      pop(&up); //спускаемся вниз
       e1=up->numb; //записываем следующий
-      up=pop(up); //спускаемся вниз
+      pop(&up); //спускаемся вниз
       k--;//после следующей операции записываем в стек результат
       switch(tmp[0]){
         case '+': up=push(up,e1+e2);break;
