@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define LENGTH_OF_UNCLOSED_TAGS 4
+#define MAX_SIZE_OF_STRING 3000
+#define SIZE_OF_STRING_OF_TAGS 60
+#define FIRST_EXCEPTION "<hr>"
+#define SECOND_EXCEPTION "<br>"
+int checkingUnclosedTags(char *string, int i){
+    char *checkArr=(char*)malloc(sizeof(char)*(LENGTH_OF_UNCLOSED_TAGS+1));
+    int j=0;
+    for (j=0;j<LENGTH_OF_UNCLOSED_TAGS;j++)
+    {
+        *(checkArr+j)=*(string+i++);
+    }
+    *(checkArr+j)='\0';
+    if ((strcmp(checkArr,FIRST_EXCEPTION)==0) || (strcmp(checkArr,SECOND_EXCEPTION)==0))
+    {
+        free(checkArr);
+        return 1;
+    }
+
+    else
+    {
+        free(checkArr);
+        return 0;
+    }
+}
+
+int compareTags(char *openedTag, char *closedTag){
+    if (strcmp(openedTag,closedTag)==0)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+char *writeTags(int i, char *string){
+    char *tag=(char*)malloc(sizeof(char)*SIZE_OF_STRING_OF_TAGS);
+    int j=0;
+    while (*(string+i)!='>')
+    {
+        if(*(string+i)=='/')
+        {
+            i++;
+            continue;
+        }
+        *(tag+j++)=*(string+i++);
+    }
+    *(tag+j++)=*(string+i);
+    *(tag+j)='\0';
+    return tag;
+}
+
+int runToString(char *string){
+    int i=0;
+    int flag=0;
+    int countOfTags=0;
+
+    char **openedTags=(char**)malloc(sizeof(char*)*SIZE_OF_STRING_OF_TAGS);
+    char **closedTags=(char**)malloc(sizeof(char*)*SIZE_OF_STRING_OF_TAGS);
+
+    while (i<strlen(string))
+    {
+        if (*(string+i)=='<')
+        {
+            if (checkingUnclosedTags(string,i)==1)
+            {
+                i+=LENGTH_OF_UNCLOSED_TAGS;
+                continue;
+            }
+            else if (*(string+i+1)=='/')
+            {
+                *(closedTags+countOfTags)=writeTags(i, string);
+                countOfTags--;
+
+                while (*(string+i++)!='>');
+
+                    flag=compareTags(*(openedTags+countOfTags), *(closedTags+countOfTags+1));
+
+                    if (!flag)
+                    {
+                        free(openedTags);
+                        free(closedTags);
+                        return 0;
+                    }
+            }
+            else
+            {
+                *(openedTags+countOfTags)=writeTags(i, string);
+                while (*(string+i++)!='>');
+                    countOfTags++;
+            }
+        }
+
+        else i++;
+    }
+    free(openedTags);
+    free(closedTags);
+    if (countOfTags==0)
+    {
+        return 1;
+    }
+    return 0;
+}
+int main(){
+    char *string=(char*)malloc(sizeof(char)*MAX_SIZE_OF_STRING);
+
+    fgets(string,MAX_SIZE_OF_STRING, stdin);
+    (*strstr(string,"\n"))= 0;
+    if(*string!='<' || (*(string+1)=='/'))
+    {
+       printf("wrong");
+       return 0;
+    }
+    if (runToString(string))
+    {
+        printf("correct");
+    }
+    else
+    {
+        printf("wrong");
+    }
+    free(string);
+    return 0;
+}
