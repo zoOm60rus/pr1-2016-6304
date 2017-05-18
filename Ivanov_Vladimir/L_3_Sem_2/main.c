@@ -4,6 +4,24 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*Функия для считывания информации из файла и определяющая его размер*/
+char *text_from_file(const char *current_path, int *file_size){
+    FILE *file=fopen(current_path,"rt");
+    /*Определение размера файла*/
+    fseek(file,0, SEEK_END);
+    *file_size = ftell(file);
+    fseek(file,0, SEEK_SET);
+    
+    char *str=(char*)malloc(sizeof(char)*(*file_size));
+    int i=0;
+    /*Посимвольное копирование из файла в строку*/
+    char symb;
+    while(fscanf(file,"%c",&symb)>0) str[i++]=symb;
+    fclose(file);
+    return str;
+}
+
+
 /*Функция обходит всю директорию в поиске файла, содержащего слово Minotaur, и возвращает длину пути*/
 int list_dir(const char *newcur_path,const char *startdir, char* name_of_file, char **name_path)
 {
@@ -23,18 +41,9 @@ int list_dir(const char *newcur_path,const char *startdir, char* name_of_file, c
                 strcat(current_path,de->d_name);
              /*Поиск нужного файла*/   
             if(de->d_type==DT_REG && !strcmp(de->d_name,name_of_file)){
-                FILE *file=fopen(current_path,"rt");//Открытие файла для чтения
-                /*Определение размера файла*/
-                fseek(file,0, SEEK_END);
-                int file_size = ftell(file);
-                fseek(file,0, SEEK_SET);
-                char *str = (char*)malloc(sizeof(char)*file_size);//Строка, в которую будет записана информация с файла
+                int i,j=0,file_size=0;
+                char *str=text_from_file(current_path,&file_size);
                 char token[199][file_size];//Массив строк для лексем
-                int i=0,j=0;
-                /*Посимвольное считывание файла*/
-                char symb;
-                while(fscanf(file,"%c",&symb)>0) str[i++]=symb;
-                fclose(file);
                 /*Разбиение на лексемы*/
                 char *tmp=strtok(str," \n");
                 while(tmp){
@@ -42,21 +51,20 @@ int list_dir(const char *newcur_path,const char *startdir, char* name_of_file, c
                     j++;
                     tmp=strtok(NULL," \n");
                 }
-                free(str);
                 /*Разбор и анализ лексем*/
-                for(j=0;j<i;j++){ 
-                    if(!strcmp(token[j],"@include"));
-                    else if(!strcmp(token[j],"Deadlock")) return height_of_path;
+                for(i=0;i<j;i++){ 
+                    if(!strcmp(token[i],"@include"));
+                    else if(!strcmp(token[i],"Deadlock")) return height_of_path;
                      /*Если файл Minotaur найден, запоминаем к нему путь и увеличиваем счётчик кол-ва путей
                         Иначе, продолжаем поиск*/
-                    else if(!strcmp(token[j],"Minotaur")){
+                    else if(!strcmp(token[i],"Minotaur")){
                         name_path[height_of_path]=(char*)malloc(sizeof(char)*1000);
                         strcpy(name_path[height_of_path],current_path);
                         height_of_path=1;
                         return height_of_path;
                     }
                     else{
-                        height_of_path=list_dir(startdir,startdir,token[j],name_path);
+                        height_of_path=list_dir(startdir,startdir,token[i],name_path);
                         if(height_of_path!=0){
                             name_path[height_of_path]=(char*)malloc(sizeof(char)*1000);
                             strcpy(name_path[height_of_path],current_path);
