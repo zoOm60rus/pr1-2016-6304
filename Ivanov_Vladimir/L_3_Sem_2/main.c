@@ -96,7 +96,7 @@ int main()
     char **name_path=(char**)malloc(200*sizeof(char*));//Массив путей
     int height_of_path=0,i;
     char *name_of_file="file.txt";
-    height_of_path=list_dir("root","root",name_of_file,name_path);
+    height_of_path=list_dir(".",".",name_of_file,name_path);
     for(i=height_of_path-1;i>=0;i--){//Вывод путей в обратном порядке
         printf("%s\n",name_path[i]);
         free(name_path[i]);}
