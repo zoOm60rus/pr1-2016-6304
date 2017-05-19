@@ -123,11 +123,12 @@ void sortandprint(struct files* head)
 			ptr[i] = head;
 			head = head->next;
 		}
+
 	qsort(ptr,number,sizeof(struct files*),compare);
 
 	for(int i = 0; i < number; i++)
 	{
-		printf("%s\n",ptr[i]->info);
+		printf("%s [%d]\n",ptr[i]->info,atoi(ptr[i]->info));
 		free(ptr[i]->info);
 		free(ptr[i]);
 	}
