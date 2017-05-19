@@ -15,7 +15,7 @@
 
 /*функция для определения операции: если это add, то переменной, 
   по которой будет распознаваться необходимая операция, присвоится
-  значение 1, если mul - 0 */
+  значение 0, если mul - 1 */
 long long int WhichIsOperation(const char *operation) 
 {
   long long int operation_ptr=ADD_PTR;
