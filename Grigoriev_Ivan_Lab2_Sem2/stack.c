@@ -1,3 +1,6 @@
+/*
+Лабораторная работа №2. Второй семестр. Григорьев Иван гр.6304
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
