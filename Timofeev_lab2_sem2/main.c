@@ -40,7 +40,7 @@ int checkingException(char* str, int i){
 }
 
 char* creatingTag(int i,char* str){
-    char* tag=(char*)malloc(sizeof(char)*20);
+    char* tag=(char*)malloc(sizeof(char)*15);
     int j=0;
     while(*(str+i)!='>'){ 
     if(*(str+i)=='/') { 
