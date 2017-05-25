@@ -4,6 +4,32 @@
 #include "Swaps.h"
 #include "Gauss.h"
 
+/*Функция, которая считает ранг матрицы, приведённой к
+ступенчатому виду*/
+int find_rang(int str, int *rank, float **mass){
+    int i,j;
+    for(i=0;i<str;i++)
+        for(j=0;j<str;j++)
+            if (mass[i][j]==1){
+                (*rank)++;
+                j=str;
+        }
+}
+/*Запись элементов из строки в матрицу*/
+void creation_matrix(char* s, float** mass,int str){
+    int i=0,j=0;
+    char *k=strtok(s," \n");
+    while(k){
+        if(j==str){
+            i++;
+            j=0;
+        }
+        mass[i][j]=atoi(k);
+        j++;
+        k=strtok(NULL," \n");
+    }
+    
+}
 /*Функция, которая с помощью метода Гаусса находит ранг матрицы */
 int calc_rank(char *s, int str, int col){
     if(str!=col) //Проверка на квадратную матрицу
@@ -15,16 +41,7 @@ int calc_rank(char *s, int str, int col){
         mass[p]=(float*)malloc(col*sizeof(float));
     
     /*Запись элементов в матрицу*/
-    char *k=strtok(s," \n");
-    while(k){
-        if(j==col){
-            i++;
-            j=0;
-        }
-        mass[i][j]=atoi(k);
-        j++;
-        k=strtok(NULL," \n");
-    }
+    creation_matrix(s,mass,str);
     /*Приведение матрицы к ступенчатому виду методом Гаусса*/
     for(i=0;i<str;i++){
         
@@ -37,7 +54,7 @@ int calc_rank(char *s, int str, int col){
             if(i+shift<str)//Проверка на наличи ненулевого элемента
                 mass[i][col-j]=mass[i][col-j]/mass[i][i+shift];
         }
-       
+        
         /*Сложение элементов i-ой строки, умноженных на элементы следующих строк того же столбца,
         с соотв. элементами других строк*/
         for(j=i+1;j<str;j++){
@@ -48,13 +65,7 @@ int calc_rank(char *s, int str, int col){
         }
     }
     /*Подсчёт количества ненулевых строк, число которых равно рангу матрицы*/
-   for(i=0;i<str;i++)
-        for(j=0;j<col;j++)
-            if (mass[i][j]==1){
-                rank++;
-                j=col;
-        }
-    
+    find_rang(str,&rank,mass);
     for(i=0;i<str;i++)
         free(mass[i]);
     free(mass);
