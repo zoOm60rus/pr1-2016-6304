@@ -26,7 +26,7 @@ stack *pop(stack *head) {
 }
 
 int checkingException(char* str, int i){
-    char* exception=(char*)malloc(sizeof(char)*5);
+    char* exception=(char*)malloc(sizeof(char)*4);
     int j=0;
     for(j=0;j<4;j++) 
     { *(exception+j)=*(str+i);
