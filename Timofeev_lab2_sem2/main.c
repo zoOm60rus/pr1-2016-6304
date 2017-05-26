@@ -25,8 +25,16 @@ stack *pop(stack *head) {
     return tmp;
 }
 
+void freeStack(stack *head){
+    while (head->prev) {
+        stack* tmp=head->prev;
+        free(head);
+        head = tmp;
+    }
+}
+
 int checkingException(char* str, int i){
-    char* exception=(char*)malloc(sizeof(char)*4);
+    char* exception=(char*)malloc(sizeof(char)*5);
     int j=0;
     for(j=0;j<4;j++) 
     { *(exception+j)=*(str+i);
@@ -37,10 +45,10 @@ int checkingException(char* str, int i){
     free(exception); 
     return 1;
     }
+    return 0;
 }
 
-char* creatingTag(int i,char* str){
-    char* tag=(char*)malloc(sizeof(char)*15);
+char* creatingTag(int i,char* str, char* strTag){
     int j=0;
     while(*(str+i)!='>'){ 
     if(*(str+i)=='/') { 
@@ -48,17 +56,18 @@ char* creatingTag(int i,char* str){
     continue;
     } 
     {
-    *(tag+j)=*(str+i); 
+    *(strTag+j)=*(str+i); 
     j++; 
     i++;
     }
     }
-    *(tag+j)='\0';
-    return tag;
+    *(strTag+j)='\0';
+    return strTag;
 }
 
 void checkingStr(char* str){
     stack* head=NULL;
+    char* strTag=(char*)malloc(sizeof(char)*15);
     int i=0;
     int len;
     len=strlen(str);
@@ -70,15 +79,17 @@ void checkingStr(char* str){
 	continue;
 	}
         else  if(*(str+i+1)!='/') {
-		head=push(head, creatingTag(i,str)); 
+		head=push(head, creatingTag(i,str,strTag));
 		i+=strlen(head->value);
 		}
                 else { 
-			if(strcmp(head->value,creatingTag(i,str))==0) {
+			if(strcmp(head->value,creatingTag(i,str,strTag))==0) {
 				i+=strlen(head->value); head=pop(head);
 			}  
 			else { 
-				printf("wrong"); 
+				printf("wrong"); {
+                 freeStack(head);
+               }
 				return;
 				} 
 			} 
@@ -86,7 +97,11 @@ void checkingStr(char* str){
         else i++;
 	}
     if (head==NULL) printf("correct\n");
-        else printf("wrong\n");
+        else {
+            printf("wrong\n");
+            freeStack(head);
+        }
+     free(strTag);
     return;
 }
 
@@ -96,6 +111,6 @@ int main() {
         fgets(str,3000,stdin);
         (*strstr(str,"\n"))= 0;
         checkingStr(str);
+    free(str);
 return 0;
 }
-
