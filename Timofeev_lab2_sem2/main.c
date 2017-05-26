@@ -90,9 +90,6 @@ void checkingStr(char* str){
     return;
 }
 
-
-
-
 int main() {
      char* str=(char*)malloc(3000*sizeof(char));
     int i=0,k=0;
