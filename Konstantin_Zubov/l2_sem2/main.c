@@ -48,11 +48,13 @@ int main() {
 			if (head(&tags) == NULL)
 		{
 			printf("correct\n");
+            free(buf);
 			return 0;
 		}
 			else
 		{
 			printf("wrong\n");
+            free(buf);
 			return 0;
 		}
 			
@@ -86,13 +88,17 @@ int main() {
         else if (buf[0] == '/' && (head(&tags) == NULL))
         {
             printf("wrong\n");
+            free(buf);
             return 0;
         }
 		c = getchar();
 	}
-	if (!headnull(&tags)) 
+	if (!headnull(&tags)) {
 	printf("wrong\n");
-	else printf("correct\n");
+    free(buf);
+    }
+    else {printf("correct\n");
+    free(buf);}
 	return 0;
 
 }
