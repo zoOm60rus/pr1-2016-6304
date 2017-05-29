@@ -17,8 +17,8 @@
 
 int main()
 {
-  FILE* bmp_file=fopen(BMP_FILENAME, "rb");
-  BITMAPFILEHEADER file_head; //заголовок с информацией о файле
+        FILE* bmp_file=fopen(BMP_FILENAME, "rb");
+        BITMAPFILEHEADER file_head; //заголовок с информацией о файле
 	BITMAPINFOHEADER image_head; //заголовок с информацией о изображении
     
 	int x0=-1,y0=-1,x1=-1,y1=-1;
