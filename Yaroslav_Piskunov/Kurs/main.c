@@ -1,3 +1,7 @@
+/*Yaroslav Piskunov, gr 6304
+CourseWork - Matrix Multiplier - main file*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
