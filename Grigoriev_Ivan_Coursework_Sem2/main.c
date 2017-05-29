@@ -41,9 +41,7 @@ int main()
 		return 0;
 	}
 	
-	raster=BmpSwap(raster, x0, y0, x1, y1);
-	
-	CreateChangedBmp(raster, &file_head, &image_head);
+	CreateChangedBmp(BmpSwap(raster, x0, y0, x1, y1), &file_head, &image_head);
 	printf("Bmp file /%s/ successfully changed in the same directory with new name /%s/\n\n", BMP_FILENAME, NEW_BMP_FILENAME);
 	
   return 0;
