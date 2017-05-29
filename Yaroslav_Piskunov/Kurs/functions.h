@@ -1,3 +1,7 @@
+/* Yaroslav Piskunov, gr 6304
+CourseWork - Matrix Multiplier - Prototype file*/
+
+
 int** convertMatrix(char* string, int colomns, int strings);
 
 int** multiply(char* matrix1, char* matrix2, int* data);
