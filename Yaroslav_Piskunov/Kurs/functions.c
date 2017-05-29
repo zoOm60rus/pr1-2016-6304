@@ -1,3 +1,6 @@
+/* Yaroslav Piskunov, gr 6304
+Course Work - Matrix Multiplier - functions file*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,24 +21,20 @@ if ((string[i]==' ')||(string[i]=='\n'))
 string[i] = '\n';
 
 
-char* d = (char*)malloc(sizeof(char));
-d[0] = '\n';
 
 char** m = (char*)malloc(strings*colomns*sizeof(char));
-m[0] = strtok(string, d );
+m[0] = strtok(string, "\n" );
 
 for (i=1; i<strings*colomns; i++)
-m[i] = strtok(NULL, d);
+m[i] = strtok(NULL, "\n");
 
 int k = 0;
 
-for (i=0; i<strings; i++){
-for (j=0; j<colomns; j++){
+for (i=0; i<strings; i++)
+for (j=0; j<colomns; j++)
 matrix[i][j] = atoi (m[k++]);
-printf("%d ", matrix[i][j]);
-}
-printf("\n");
-}
+
+
 
 
 return (matrix);
@@ -56,7 +55,7 @@ matrix[i] = (int*)malloc(data[2]*sizeof(int));
 for(i=0; i<data[1]; i++)
 for(j=0; j<data[2]; j++){
 matrix[i][j] = 0;
-for(z=0; z<=data[2]; z++)
+for(z=0; z<data[2]; z++)
 matrix[i][j] = matrix[i][j] + Imatrix1[i][z]*Imatrix2[z][j];
 }
 
