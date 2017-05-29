@@ -1,3 +1,8 @@
+/* Yaroslav Piskunov, gr. 6304
+Lab Work №3 - File System */
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,7 +10,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-char* FindString(char* path) {
+char* FindString(char* path) {  //Function for taking string from file
 
     FILE* file = fopen(path, "r");
     char* string = (char*)malloc(1000*sizeof(char));
@@ -13,7 +18,7 @@ char* FindString(char* path) {
     return(string);
 }
 
-int recTreePathFinding (char* path, int* iterator, char** primal_array) {
+int recTreePathFinding (char* path, int* iterator, char** primal_array) { //Function for walking through file tree.
 
    DIR* directory = opendir(path);
    struct dirent* de = (struct dirent*)malloc(sizeof(struct dirent));
@@ -21,7 +26,8 @@ int recTreePathFinding (char* path, int* iterator, char** primal_array) {
 
     if(directory != NULL){
         while (de) {
-            if((de->d_type == DT_REG)&&(strcmp(de->d_name, "a.out")!=0)&&(strcmp(de->d_name, "main.c")!=0)) {
+            if((de->d_type == DT_REG)&&(strcmp(de->d_name, "a.out")!=0)&&(strcmp(de->d_name, "main.c")!=0)) { 
+                /*In case of finding text file take string from it */  
                 int backup = strlen(path);
                 strcat(path, "/");
                 strcat(path, de->d_name);
@@ -32,7 +38,7 @@ int recTreePathFinding (char* path, int* iterator, char** primal_array) {
                 path[backup]='\0';
             }
             if ((de->d_type == DT_DIR)&&(strcmp(de->d_name, ".")!=0)&&(strcmp(de->d_name, "..")!=0)){
-
+            /* In case of finding directory recursively open it */
             int backup = strlen(path);
             strcat(path, "/");
             strcat(path, de->d_name);
@@ -52,7 +58,7 @@ int comparator (const void* a, const void* b) {
     return (*(int*)a - *(int*)b);
 }
 
-int* set_relativity (int* array, int* copy_of_array, int size){
+int* set_relativity (int* array, int* copy_of_array, int size){ //Function wich sets relativity with Old and New-Sorted massives by index
     int* index = (int*)malloc(size*sizeof(int));
     int i, j;
                                                                                                                    
@@ -66,7 +72,7 @@ for(i=0;i<size; i++) {
 }
 
 
-int* sort_index (int* array, int size) {
+int* sort_index (int* array, int size) { //Function creates the copy of massive, then sorts in and gives away index massive created by upper function
     int* index = (int*)malloc(size*sizeof(int));
     int i;
 
@@ -81,7 +87,7 @@ int* sort_index (int* array, int size) {
     return (index);
 }
 
-int take_number (char* line) {
+int take_number (char* line) { //Founction cuts string and returns number in the begining of it
 
  char* number = (char*)malloc(strlen(line)*sizeof(char));
  number = strtok(line, " ");
@@ -89,7 +95,7 @@ int take_number (char* line) {
  return(atoi(number));
 }
 
-char* take_str (char* line) {
+char* take_str (char* line) { //Function cuts string and returns string after number
 
     int i = 0;
 
@@ -101,7 +107,7 @@ char* take_str (char* line) {
 }
 
 int main() {
-    char** primal_array = (char**)malloc(1000*sizeof(char*));
+    char** primal_array = (char**)malloc(1000*sizeof(char*)); //Memory for strings taken from files
 
     int i = 0;
     char path[10000] = ".";
@@ -109,8 +115,8 @@ int main() {
     int size = 0;
     recTreePathFinding(path, &size, primal_array);
 
-    char** array_of_str = (char**)malloc(size*sizeof(char*));
-    int* array_of_num = (int*)malloc(size*sizeof(int));
+    char** array_of_str = (char**)malloc(size*sizeof(char*)); // Array for strings cutted from "PrimalArray" objects
+    int* array_of_num = (int*)malloc(size*sizeof(int)); //Array for numbers cutted from "PrimalArray" objects
 
     printf("all strings sucsessfully found\n");
     for(i=0; i<size; i++){
