@@ -1,4 +1,5 @@
 #pragma pack(push, 1)
+
 typedef struct tagBITMAPFILEHEADER 
 { 
    unsigned short bfType; //определяет тип файла. Здесь он должен быть BM. 
@@ -28,4 +29,12 @@ typedef struct tagBITMAPINFOHEADER
    которые необходимы для того, чтобы изобразить рисунок. 
    Если это значение равно 0 (как это обычно и бывает), то все цвета считаются важными*/
 } BITMAPINFOHEADER;
+
 #pragma pack(pop)
+
+typedef struct RGBTRIPLE
+{
+	char  rgbBlue;
+	char  rgbGreen;
+	char  rgbRed;
+} RGBTRIPLE;
